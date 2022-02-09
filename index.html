@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha256-eVNjHw5UeU0jUqPPpZHAkU1z4U+QFBBY488WvueTm88=" crossorigin="anonymous"></script>
+    <link href="main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>Shirts Studio</title>
+</head>
+<body>
+<div class="left-menu">
+    <p>Menu Title</p>
+</div>
+
+    <div class="black-background">
+        <div class="white-background">
+            <p>로그인 하세요</p>
+            <form action="">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" id="email">
+                    <p id="email-alert">이메일이 올바르지 않습니다</p>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" id="password">
+                    <p id="password-alert">비밀번호가 올바르지 않습니다</p>
+                </div>
+            </form>
+            <button type="submit" class="btn btn-primary" id="subButton">전송</button>
+            <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+    </div>
+
+    <div class="nav-menu">
+        <h3 style="margin: 0" class="navFont">Shirts Studio</h3>
+        <a id="login" class="btn btn-primary btn-lg" href="#" role="button">Log In</a>
+        <a id="nav-sub-button" class="btn btn-secondary btn-lg" role="button" href="cart.html">Products</a>
+    </div>
+
+<!--    <ul class="list-group nav-sub">-->
+<!--        <li class="list-group-item">Outer</li>-->
+<!--        <li class="list-group-item">Inner Wear</li>-->
+<!--        <li class="list-group-item">Shirts</li>-->
+<!--    </ul>-->
+
+    <div class="jumbotron main-background">
+        <h1 class="display-4">Shirts Studio</h1>
+        <hr class="my-4">
+<!--        <a id="show-menu" class="btn btn-danger btn-lg" href="#" role="button">Show Menu</a>-->
+    </div>
+
+    <h4 class="my-4 text-center">Showcase</h4>
+
+    <div style="overflow: hidden; position: relative">
+        <div class="slide-container">
+            <div class="slide-box">
+                <img src="images/show1.jpg">
+            </div>
+            <div class="slide-box">
+                <img src="images/show2.jpg">
+            </div>
+            <div class="slide-box">
+                <img src="images/show3.jpg">
+            </div>
+        </div>
+        <button class="slide-next">&#10095;</button>
+        <button class="slide-prev">&#10094;</button>
+    </div>
+    <h4 class="my-4 text-center">Information</h4>
+        <div class="card-background">
+            <div class="card-box">
+                <img src="images/shirtsInfo.jpg" class="picImg">
+            </div>
+            <div class="card-box">
+                <img src="images/shirtsInfo2.jpg">
+            </div>
+            <div class="card-box">
+                <img src="images/shirtsInfo3.jpg">
+            </div>
+        </div>
+    </div>
+<!--    <form class="container my-5">-->
+<!--        <div class="form-group">-->
+
+<!--            <p>상품선택</p>-->
+<!--            <select class="form-control" id="option1">-->
+<!--                <option>모자</option>-->
+<!--                <option>셔츠</option>-->
+<!--            </select>-->
+
+<!--        </div>-->
+<!--    </form>-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <img src="..." class="card-img-top" alt="...">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">Card title</h5>-->
+<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--            <a href="#" class="btn btn-primary">Go somewhere</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <button class="btn btn-danger" id="apple">상품보여주기</button>-->
+
+    <script>
+        //로그인 모달창
+        $("#login").click(function (){
+            $(".black-background").addClass("slide-down")
+        })
+        $("#close").click(function (){
+            $(".black-background").removeClass("slide-down")
+        })
+        $("#nav-sub-button").click(function (){
+            $(".nav-sub").fadeToggle()
+            // toggle() , slideToggle(), fadeToggle()
+        })
+        $('.black-background').click(function (e){
+            if (e.target == e.currentTarget){
+                $('.black-background').hide()
+            }
+        })
+
+        //로그인 폼 전송, 로그인 정규식이용
+        $('#subButton').click(function (){
+            $('form').submit()
+        })
+        $('form').submit(function (e){
+            var emailValue = $("#email").val()
+            var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+            var pswValue = $("#password").val()
+            if (emailValue == ""){
+                e.preventDefault()
+                $("#email-alert").text("이메일칸이 공백입니다")
+                $("#email-alert").show()
+            }else if(emailRule.test(emailValue) == false){
+                e.preventDefault()
+                $("#email-alert").show()
+            }
+            if (pswValue == ""){
+                e.preventDefault()
+                $("#password-alert").text("비밀번호칸이 공백입니다")
+                $("#password-alert").show()
+            }else if (/[A-Z]+/.test(pswValue) == false){
+                e.preventDefault()
+                $("#password-alert").show()
+            }
+            // if ($("#email").val() == ""){
+            //     e.preventDefault()
+            //     $("#email-alert").show()
+            // }
+            // if ($("#password").val() == ""){
+            //     e.preventDefault()
+            //     $("#password-alert").show()
+            // }
+
+            // 문자 정규식
+            // [ - ] 찾을 문자의 범위
+            // \S 특수문자 포함 모든 문자 , \S+ 모든 문자 여러개
+            // /\S+@\S+\.\S+/.test('ㅁ느아ㅣㅁ느아ㅣ@naver.com')
+        })
+        // $("#email").on('input',function (){
+        //     $("#email-alert").show()
+        // })
+
+        //쇼케이스 슬라이드
+        $('#show-menu').click(function (){
+            $('.left-menu').animate({marginLeft : '0px'})
+        })
+        $('.slide-1').click(function (){
+            $('.slide-container').css('transform','translateX(0vw)')
+        })
+        $('.slide-2').click(function (){
+            $('.slide-container').css('transform','translateX(-100vw)')
+        })
+        $('.slide-3').click(function (){
+            $('.slide-container').css('transform','translateX(-200vw)')
+        })
+
+        var nowPicture = 1;
+
+        $('.slide-next').click(function (){
+            $('.slide-container').css('transform','translateX(-'+nowPicture+'00vw)')
+            nowPicture= nowPicture + 1;
+            if (nowPicture==4){
+                nowPicture = 0
+                $('.slide-container').css('transform','translateX(-'+nowPicture+'00vw)')
+                nowPicture = 1
+            }
+        })
+        $('.slide-prev').click(function (){
+            nowPicture= nowPicture - 1;
+            if (nowPicture >=1){
+                $('.slide-container').css('transform','translateX(-'+(nowPicture-1)+'00vw)')
+            }
+            if (nowPicture == 0){
+                $('.slide-container').css('transform','translateX('+(nowPicture-2)+'00vw)')
+                nowPicture = 3
+            }
+        })
+
+        //상단 메뉴바 스크롤
+        $(window).scroll(function (){
+            if ($(window).scrollTop()>100){
+                $('.navFont').addClass('small-logo')
+                $('.nav-menu').addClass('nav-black')
+            }else{
+                $('.navFont').removeClass('small-logo')
+                $('.nav-menu').removeClass('nav-black')
+            }
+        })
+        //information sticky이용
+        $(window).scroll(function (){
+            var height = $(window).scrollTop()
+            var y = (-1/450) * height + (16/9 + 1)
+            var y2 = (-1/2250) * height + (2/5 + 1)
+            var y3 = (-1/500) * height + (18/5)
+            var y4 = (-1/5000) * height + (13/50+1)
+            $('.card-box').eq(0).css('opacity',y)
+            $('.card-box').eq(1).css('opacity',y3)
+            if (height > 900){
+                $('.card-box').eq(0).css('transform',`scale(${y2})`)
+            }
+            if (height > 1300){
+                $('.card-box').eq(1).css('transform',`scale(${y4})`)
+            }
+        })
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
